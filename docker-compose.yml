@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  backend:
+    image: ghcr.io/sina-morshedi/kheyr-backend:latest
+    container_name: kheyr-backend
+    restart: unless-stopped
+    ports:
+      - "8087:4000"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+      SERVER_PORT: 4000
+    volumes:
+      - /opt/portainer-stacks/kheyr-backend/secrets/firebase-service-account.json:/app/config/firebase-service-account.json:ro
+    networks:
+      - nanoelectronics-network
+
+networks:
+  nanoelectronics-network:
+    external: true
