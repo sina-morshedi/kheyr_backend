@@ -9,7 +9,7 @@ services:
       - "8088:4000"
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
+      SPRING_DATA_MONGODB_URI: mongodb://root:83407899_Sina@194.5.159.251:27017/KheyrApp?authSource=admin
       SERVER_PORT: 4000
     volumes:
       - /opt/portainer-stacks/kheyr-backend/secrets/firebase-service-account.json:/app/config/firebase-service-account.json:ro

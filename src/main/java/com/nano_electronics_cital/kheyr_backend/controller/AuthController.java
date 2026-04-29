@@ -1,11 +1,13 @@
 package com.nano_electronics_cital.kheyr_backend.controller;
 
+import com.nano_electronics_cital.kheyr_backend.api.ApiResponse;
 import com.nano_electronics_cital.kheyr_backend.dto.auth.AuthResponse;
 import com.nano_electronics_cital.kheyr_backend.dto.auth.LoginRequest;
 import com.nano_electronics_cital.kheyr_backend.dto.auth.RegisterUserRequest;
 import com.nano_electronics_cital.kheyr_backend.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +38,8 @@ public class AuthController {
     }
 
     @DeleteMapping("/logout")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void logout(@RequestHeader("X-Session-Token") String sessionToken) {
+    public ResponseEntity<ApiResponse<Void>> logout(@RequestHeader("X-Session-Token") String sessionToken) {
         authService.logout(sessionToken);
+        return ResponseEntity.ok(ApiResponse.successMessage("Logged out successfully."));
     }
 }
