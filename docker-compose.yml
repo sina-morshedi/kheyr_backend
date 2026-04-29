@@ -6,7 +6,7 @@ services:
     container_name: kheyr-backend
     restart: unless-stopped
     ports:
-      - "8087:4000"
+      - "8088:4000"
     environment:
       SPRING_PROFILES_ACTIVE: prod
       SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
