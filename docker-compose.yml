@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   backend:
-    image: ghcr.io/sina-morshedi/kheyr-backend:b001b6d7d6dedca0004b52adad08ea1791695e47
+    image: ghcr.io/sina-morshedi/kheyr-backend:c4ef8a85b2f30b4ef5ff03c1d3aa34a7f003758a
     container_name: kheyr-backend
     restart: unless-stopped
     ports:
