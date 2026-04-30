@@ -33,17 +33,20 @@ public class MessageService {
     private final ConversationRepository conversationRepository;
     private final ChatMapper chatMapper;
     private final ChatRealtimeService chatRealtimeService;
+    private final FcmNotificationService fcmNotificationService;
 
     public MessageService(
             MessageRepository messageRepository,
             ConversationRepository conversationRepository,
             ChatMapper chatMapper,
-            ChatRealtimeService chatRealtimeService
+            ChatRealtimeService chatRealtimeService,
+            FcmNotificationService fcmNotificationService
     ) {
         this.messageRepository = messageRepository;
         this.conversationRepository = conversationRepository;
         this.chatMapper = chatMapper;
         this.chatRealtimeService = chatRealtimeService;
+        this.fcmNotificationService = fcmNotificationService;
     }
 
     public MessageResponse sendMessage(SendMessageRequest request) {
@@ -81,6 +84,7 @@ public class MessageService {
 
         Conversation savedConversation = conversationRepository.save(conversation);
         chatRealtimeService.publishMessageEvent(RealtimeEventType.MESSAGE_CREATED, savedConversation, savedMessage);
+        fcmNotificationService.notifyMessageCreated(savedConversation, savedMessage);
 
         return chatMapper.toMessageResponse(savedMessage);
     }
